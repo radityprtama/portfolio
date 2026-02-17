@@ -68,12 +68,12 @@ const HeroHeader = () => {
       try {
         const hasVisited = sessionStorage.getItem("visited");
         const method = hasVisited ? "GET" : "POST";
-        
-        const res = await fetch("/api/visitor-count", { 
+
+        const res = await fetch("/api/visitor-count", {
           method,
-          headers: { "Content-Type": "application/json" } 
+          headers: { "Content-Type": "application/json" },
         });
-        
+
         if (res.ok) {
           const data = await res.json();
           setVisitorCount(data.count);
@@ -85,7 +85,7 @@ const HeroHeader = () => {
         console.error("Failed to fetch visitor count:", error);
       }
     };
-    
+
     fetchVisitorCount();
   }, []);
 
@@ -296,7 +296,7 @@ const HeroHeader = () => {
             </div>
 
             {/* Theme Toggle & Visitor Count */}
-            <div className="flex flex-col items-end gap-2 py-1">
+            <div className="flex flex-col items-end gap-7 py-1">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -305,7 +305,7 @@ const HeroHeader = () => {
                 <ThemeToggle />
               </motion.div>
               {visitorCount !== null && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.8 }}
