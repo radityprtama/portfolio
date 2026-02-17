@@ -4,7 +4,7 @@ export const personalInfo = {
   email: "hi@pratama.dev",
   calLink: "https://cal.com/radityapratama/15min",
   resumePath: "/resume.pdf",
-  profileImage: "/5Mzl_Jju_400x400.jpg",
+  profileImage: "/007470ab60f6588f85e74c7556af7867.jpeg",
   bio: [
     "Hey! I'm Raditya, a third-year vocational high school student at SMK Nusantara 1. I'm interested in building SaaS products with AI, and currently learning how to become an AI engineer.",
     "I love turning ideas into real products and I'm always exploring new ways to build with AI.",

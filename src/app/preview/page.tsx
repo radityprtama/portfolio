@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { personalInfo } from '@/config/personal';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import { personalInfo } from "@/config/personal";
+import { motion } from "framer-motion";
 
 // Smooth spring-like easing for React Flow feel
 const smoothEase = [0.22, 1, 0.36, 1] as const;
@@ -33,7 +33,11 @@ const separatorVariants = {
 export default function PreviewPage() {
   return (
     <main className="h-screen bg-background dashed-border-container flex flex-col overflow-hidden">
-      <div className="dashed-content-lines" style={{ maxWidth: '1150px' }} aria-hidden="true" />
+      <div
+        className="dashed-content-lines"
+        style={{ maxWidth: "1150px" }}
+        aria-hidden="true"
+      />
       <div className="max-w-[1150px] mx-4 sm:mx-12 md:mx-auto relative w-full flex flex-col h-full">
         {/* Top dot grid section - fills remaining space */}
         <motion.div
@@ -43,7 +47,14 @@ export default function PreviewPage() {
           variants={dotGridVariants}
         >
           <div className="relative p-4 h-full">
-            <div className="w-full h-full dot-grid" style={{ backgroundImage: 'radial-gradient(#aaa 1.5px, transparent 1.5px)', backgroundSize: '14px 14px' }}></div>
+            <div
+              className="w-full h-full dot-grid"
+              style={{
+                backgroundImage:
+                  "radial-gradient(#aaa 1.5px, transparent 1.5px)",
+                backgroundSize: "14px 14px",
+              }}
+            ></div>
           </div>
         </motion.div>
 
@@ -78,8 +89,8 @@ export default function PreviewPage() {
               <div className="flex flex-col select-none">
                 <motion.h1
                   className="text-[5rem] font-bold leading-[1.1] text-title"
-                  initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ duration: 0.7, ease: smoothEase, delay: 0.2 }}
                 >
                   {personalInfo.name}
@@ -124,7 +135,14 @@ export default function PreviewPage() {
           transition={{ delay: 0.3 }}
         >
           <div className="relative p-4 h-full">
-            <div className="w-full h-full dot-grid" style={{ backgroundImage: 'radial-gradient(#aaa 1.5px, transparent 1.5px)', backgroundSize: '14px 14px' }}></div>
+            <div
+              className="w-full h-full dot-grid"
+              style={{
+                backgroundImage:
+                  "radial-gradient(#aaa 1.5px, transparent 1.5px)",
+                backgroundSize: "14px 14px",
+              }}
+            ></div>
           </div>
         </motion.div>
       </div>

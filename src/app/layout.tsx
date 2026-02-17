@@ -3,10 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Raditya Alia Pratama | Student",
-  description: "Vocational student interested in building SaaS products with AI.",
+  description:
+    "Vocational student interested in building SaaS products with AI.",
   icons: {
-    icon: "/favicon-portfolio.png",
-    apple: "/favicon-portfolio.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
@@ -17,9 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
