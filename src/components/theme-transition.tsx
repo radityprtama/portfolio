@@ -47,12 +47,11 @@ export const ThemeTransitionProvider = ({ children }: { children: React.ReactNod
 
     const timer = setTimeout(() => {
       setTheme(targetTheme);
-      // Small delay to ensure theme switch has painted behind the curtain
       setTimeout(() => {
         setIsTransitioning(false);
         setTargetTheme(null);
-      }, 50); 
-    }, 400); // Matches the duration of the entry animation
+      }, 30); 
+    }, 150); // Fast curtain cover
 
     return () => clearTimeout(timer);
   }, [isTransitioning, targetTheme, setTheme]);
@@ -79,7 +78,7 @@ const Curtain = ({ isTransitioning, targetTheme }: { isTransitioning: boolean; t
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(100% 0 0 0)" }}
           style={{ backgroundColor: curtainColor }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
         />
       )}
     </AnimatePresence>
