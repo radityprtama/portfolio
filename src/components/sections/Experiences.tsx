@@ -19,48 +19,60 @@ interface Experience {
 }
 
 const techLogos: Record<string, string> = {
-  "AWS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
-  "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg",
-  "PostgreSQL": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg",
-  "Playwright": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg",
-  "Docker": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg",
-  "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-plain.svg",
-  "Tailwind": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  "Redis": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
-  "React": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+  AWS: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+  "Next.js":
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+  TypeScript:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg",
+  PostgreSQL:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg",
+  Playwright:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg",
+  Docker:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg",
+  "Node.js":
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-plain.svg",
+  Tailwind:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+  Redis:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+  React:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  Python:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
 };
 
 const experiences: Experience[] = [
   {
     id: "exp-0",
-    company: "Stan",
-    role: "Software Engineer",
-    logo: "/stan-logo.jpg",
-    duration: "Incoming Summer 2026",
-    location: "Toronto, Canada",
-    isFullTime: true,
+    company: "I-CON Technology",
+    role: "Support Developer",
+    logo: "/icon.png",
+    duration: "Summer 2026",
+    location: "Cimone, Tangerang",
+    isFullTime: false,
     description: [
-      "Empowering creators to become entrepreneurs.",
+      "Developed and maintained internal web applications including cargo management and inventory systems to streamline operational workflows.",
+      "Provided technical support and system troubleshooting across client deployments, ensuring stability, performance, and reliability.",
+      "Collaborated with the engineering team to implement feature enhancements, optimize database queries, and improve overall system architecture.",
     ],
-    techStack: ["AWS", "React", "Python"],
+    techStack: ["React", "Laravel", "MySQL", "AWS", "Linux"],
   },
-  {
-    id: "exp-1",
-    company: "Clover Labs",
-    role: "Software Engineer Intern",
-    logo: "/tryclover_logo.jpg",
-    duration: "January 2026 - Present",
-    location: "Toronto, Canada",
-    isFullTime: true,
-    description: [
-      "A portfolio of four verticalized ('leafs') AI growth agents.",
-      "On track to hit $50M ARR in 2026.",
-      "We're profitability obsessed, and proudly Canadian 🍁.",
-    ],
-    techStack: ["AWS", "Next.js", "TypeScript", "PostgreSQL", "Playwright", "Docker", "Node.js", "Tailwind", "Redis"],
-  },
+  // {
+  //   id: "exp-1",
+  //   company: "Clover Labs",
+  //   role: "Software Engineer Intern",
+  //   logo: "/tryclover_logo.jpg",
+  //   duration: "January 2026 - Present",
+  //   location: "Toronto, Canada",
+  //   isFullTime: true,
+  //   description: [
+  //     "A portfolio of four verticalized ('leafs') AI growth agents.",
+  //     "On track to hit $50M ARR in 2026.",
+  //     "We're profitability obsessed, and proudly Canadian 🍁.",
+  //   ],
+  //   techStack: ["AWS", "Next.js", "TypeScript", "PostgreSQL", "Playwright", "Docker", "Node.js", "Tailwind", "Redis"],
+  // },
   // {
   //   id: "exp-2",
   //   company: "GSoC",
@@ -99,13 +111,22 @@ const Experiences = () => {
   return (
     <section className="relative z-50 bg-background">
       <div className="relative p-3">
-        <h2 className="text-lg font-semibold text-title select-none">My experience.</h2>
+        <h2 className="text-lg font-semibold text-title select-none">
+          My experience.
+        </h2>
       </div>
       <div className="dashed-separator"></div>
       <div className="relative p-3">
         <div className="flex flex-col">
           {experiences.map((exp) => (
-            <div key={exp.id} className={experiences.indexOf(exp) < experiences.length - 1 ? "dashed-border-bottom" : ""}>
+            <div
+              key={exp.id}
+              className={
+                experiences.indexOf(exp) < experiences.length - 1
+                  ? "dashed-border-bottom"
+                  : ""
+              }
+            >
               <button
                 onClick={() => toggleAccordion(exp.id)}
                 className="w-full flex items-start justify-between py-4 text-left group transition-colors duration-200"
@@ -128,21 +149,29 @@ const Experiences = () => {
                   </a>
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
-                      <span className="text-[15px] font-bold text-title">{exp.company}</span>
+                      <span className="text-[15px] font-bold text-title">
+                        {exp.company}
+                      </span>
                       {exp.isFullTime && (
                         <span className="text-[11px] px-1.5 py-0.5 rounded-[4px] bg-muted text-muted-foreground font-medium">
                           Full Time
                         </span>
                       )}
                     </div>
-                    <span className="text-[14px] text-muted-foreground">{exp.role}</span>
+                    <span className="text-[14px] text-muted-foreground">
+                      {exp.role}
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <div className="hidden sm:flex flex-col items-end mr-2">
-                    <span className="text-[13px] font-medium text-title">{exp.duration}</span>
-                    <span className="text-[12px] text-muted-foreground">{exp.location}</span>
+                    <span className="text-[13px] font-medium text-title">
+                      {exp.duration}
+                    </span>
+                    <span className="text-[12px] text-muted-foreground">
+                      {exp.location}
+                    </span>
                   </div>
                   <motion.div
                     animate={{ rotate: openId === exp.id ? 180 : 0 }}
@@ -162,16 +191,16 @@ const Experiences = () => {
                       opacity: 1,
                       transition: {
                         height: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
-                        opacity: { duration: 0.3, delay: 0.1 }
-                      }
+                        opacity: { duration: 0.3, delay: 0.1 },
+                      },
                     }}
                     exit={{
                       height: 0,
                       opacity: 0,
                       transition: {
                         height: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-                        opacity: { duration: 0.2 }
-                      }
+                        opacity: { duration: 0.2 },
+                      },
                     }}
                     className="overflow-hidden"
                   >
@@ -182,7 +211,10 @@ const Experiences = () => {
                             key={idx}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: 0.1 + idx * 0.05 }}
+                            transition={{
+                              duration: 0.3,
+                              delay: 0.1 + idx * 0.05,
+                            }}
                             className="text-[13px] text-foreground leading-relaxed marker:text-muted-foreground pl-1"
                           >
                             {item}
@@ -202,7 +234,10 @@ const Experiences = () => {
                               key={tech}
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.2, delay: 0.25 + idx * 0.03 }}
+                              transition={{
+                                duration: 0.2,
+                                delay: 0.25 + idx * 0.03,
+                              }}
                               className="text-[11px] px-2 py-0.5 rounded-[4px] border border-border bg-background text-foreground font-medium flex items-center gap-1"
                             >
                               {techLogos[tech] && (
@@ -230,7 +265,12 @@ const Experiences = () => {
       <div className="dashed-separator"></div>
       <div className="relative p-3">
         <div className="flex justify-center py-2">
-          <a href="https://www.linkedin.com/in/radityaapratama/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-[#404040] hover:bg-[#262626] text-white text-[13px] font-medium rounded-[9px] transition-colors duration-300 group">
+          <a
+            href="https://www.linkedin.com/in/radityaapratama/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#404040] hover:bg-[#262626] text-white text-[13px] font-medium rounded-[9px] transition-colors duration-300 group"
+          >
             View All
             <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>

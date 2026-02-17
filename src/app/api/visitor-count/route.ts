@@ -1,27 +1,45 @@
 import { NextResponse } from "next/server";
+import { Redis } from "@upstash/redis";
 
-// In-memory store for development/fallback
-// Note: This resets when the server restarts or in serverless environments
-let memoryCount = 1240; 
+// In-memory fallback for development (when KV env vars are not set)
+let memoryCount = 1240;
+
+function getRedis(): Redis | null {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+    return null;
+  }
+  return new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
+  });
+}
 
 export async function GET() {
-  // TODO: When @vercel/kv is installed and configured:
-  // 1. npm install @vercel/kv
-  // 2. Uncomment the following lines:
-  // import { kv } from "@vercel/kv";
-  // const count = await kv.get("visitor_count");
-  // return NextResponse.json({ count: count || 0 });
-
-  return NextResponse.json({ count: memoryCount });
+  try {
+    const redis = getRedis();
+    if (redis) {
+      const count = (await redis.get<number>("visitor_count")) ?? 0;
+      return NextResponse.json({ count });
+    }
+    return NextResponse.json({ count: memoryCount });
+  } catch (error) {
+    console.error("Visitor count GET error:", error);
+    return NextResponse.json({ count: memoryCount });
+  }
 }
 
 export async function POST() {
-  // TODO: When @vercel/kv is installed and configured:
-  // 1. Uncomment the following lines:
-  // import { kv } from "@vercel/kv";
-  // const count = await kv.incr("visitor_count");
-  // return NextResponse.json({ count });
-
-  memoryCount++;
-  return NextResponse.json({ count: memoryCount });
+  try {
+    const redis = getRedis();
+    if (redis) {
+      const count = await redis.incr("visitor_count");
+      return NextResponse.json({ count });
+    }
+    memoryCount++;
+    return NextResponse.json({ count: memoryCount });
+  } catch (error) {
+    console.error("Visitor count POST error:", error);
+    memoryCount++;
+    return NextResponse.json({ count: memoryCount });
+  }
 }

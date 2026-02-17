@@ -296,7 +296,7 @@ const HeroHeader = () => {
             </div>
 
             {/* Theme Toggle & Visitor Count */}
-            <div className="flex flex-col items-end justify-between py-1 h-full">
+            <div className="flex flex-col items-end gap-2 py-1">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -304,7 +304,6 @@ const HeroHeader = () => {
               >
                 <ThemeToggle />
               </motion.div>
-              
               {visitorCount !== null && (
                 <motion.div 
                   initial={{ opacity: 0, y: 5 }}
