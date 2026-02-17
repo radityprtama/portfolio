@@ -2,8 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import { Mail, Calendar } from "lucide-react";
+import { Mail, Calendar, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import { ThemeToggle } from "@/components/theme-transition";
 
 const GithubIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -59,6 +60,34 @@ const HeroHeader = () => {
   const [totalContributions, setTotalContributions] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [monthLabels, setMonthLabels] = React.useState<MonthLabel[]>([]);
+  const [visitorCount, setVisitorCount] = React.useState<number | null>(null);
+
+  // Visitor Count Effect
+  React.useEffect(() => {
+    const fetchVisitorCount = async () => {
+      try {
+        const hasVisited = sessionStorage.getItem("visited");
+        const method = hasVisited ? "GET" : "POST";
+        
+        const res = await fetch("/api/visitor-count", { 
+          method,
+          headers: { "Content-Type": "application/json" } 
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          setVisitorCount(data.count);
+          if (!hasVisited) {
+            sessionStorage.setItem("visited", "true");
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch visitor count:", error);
+      }
+    };
+    
+    fetchVisitorCount();
+  }, []);
 
   // Convert contribution count to level (0-4)
   const getContributionLevel = (count: number): number => {
@@ -169,30 +198,30 @@ const HeroHeader = () => {
   const getLevelColor = (level: number) => {
     switch (level) {
       case 0:
-        return "bg-[#ebedf0]";
+        return "bg-[#ebedf0] dark:bg-[#161b22]";
       case 1:
-        return "bg-[#c4c8cf]";
+        return "bg-[#c4c8cf] dark:bg-[#0e4429]";
       case 2:
-        return "bg-[#8b929c]";
+        return "bg-[#8b929c] dark:bg-[#006d32]";
       case 3:
-        return "bg-[#5c636e]";
+        return "bg-[#5c636e] dark:bg-[#26a641]";
       case 4:
-        return "bg-[#2d3340]";
+        return "bg-[#2d3340] dark:bg-[#39d353]";
       default:
-        return "bg-[#ebedf0]";
+        return "bg-[#ebedf0] dark:bg-[#161b22]";
     }
   };
 
   return (
     <div className="w-full">
-      <div className="relative z-50 bg-background">
+      <div className="relative z-50 bg-background transition-colors duration-300">
         <div className="relative p-3">
           <div className="w-full h-[60px] sm:h-[140px] dot-grid"></div>
         </div>
         <div className="dashed-separator"></div>
       </div>
 
-      <div className="relative z-50 bg-background">
+      <div className="relative z-50 bg-background transition-colors duration-300">
         <div className="relative p-3">
           <div className="flex items-stretch justify-between relative">
             <div className="flex items-end gap-3">
@@ -203,7 +232,7 @@ const HeroHeader = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut", delay: 0 }}
               >
-                <div className="border border-border rounded-[12px] p-[4px] cursor-pointer hover:brightness-90 transition duration-300 bg-white">
+                <div className="border border-border rounded-[12px] p-[4px] cursor-pointer hover:brightness-90 transition duration-300 bg-background">
                   <Image
                     alt="Profile"
                     width={90}
@@ -219,7 +248,7 @@ const HeroHeader = () => {
                         href="https://github.com/kaltdev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute -top-2 -right-2 w-7 h-7 rounded-full border-2 border-white overflow-hidden shadow-sm hover:opacity-80 transition-opacity"
+                        className="absolute -top-2 -right-2 w-7 h-7 rounded-full border-2 border-background overflow-hidden shadow-sm hover:opacity-80 transition-opacity"
                       >
                         <Image
                           alt="KaltLabs"
@@ -265,6 +294,29 @@ const HeroHeader = () => {
                 </div>
               </div>
             </div>
+
+            {/* Theme Toggle & Visitor Count */}
+            <div className="flex flex-col items-end justify-between py-1 h-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+              >
+                <ThemeToggle />
+              </motion.div>
+              
+              {visitorCount !== null && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                  className="flex items-center gap-1.5 text-xs text-muted-foreground/80 font-medium select-none bg-secondary/50 px-2 py-1 rounded-full border border-border/50 backdrop-blur-sm"
+                >
+                  <Eye size={12} className="text-primary/70" />
+                  <span>{visitorCount.toLocaleString()}</span>
+                </motion.div>
+              )}
+            </div>
           </div>
         </div>
         <div className="dashed-separator"></div>
@@ -298,7 +350,7 @@ const HeroHeader = () => {
             transition={{ duration: 0.3, ease: "easeOut", delay: 0.8 }}
           >
             <a
-              className="w-fit flex items-center bg-[#404040] hover:bg-[#262626] transition-colors duration-300 gap-1.5 px-3 py-2 text-white text-sm font-medium cursor-pointer rounded-[9px] group overflow-hidden"
+              className="w-fit flex items-center bg-primary hover:bg-action-hover transition-colors duration-300 gap-1.5 px-3 py-2 text-primary-foreground text-sm font-medium cursor-pointer rounded-[9px] group overflow-hidden"
               href={personalInfo.calLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -317,7 +369,7 @@ const HeroHeader = () => {
             </a>
 
             <a
-              className="w-fit flex items-center gap-1.5 px-3 py-2 bg-[#f5f5f5] hover:brightness-[0.97] transition-colors duration-300 text-sm text-foreground font-medium border border-border cursor-pointer rounded-[9px] group overflow-hidden"
+              className="w-fit flex items-center gap-1.5 px-3 py-2 bg-secondary hover:bg-accent transition-colors duration-300 text-sm text-foreground font-medium border border-border cursor-pointer rounded-[9px] group overflow-hidden"
               href={`mailto:${personalInfo.email}`}
             >
               <div className="relative w-4 h-4 overflow-hidden">
@@ -334,7 +386,7 @@ const HeroHeader = () => {
             </a>
 
             {/* <a
-              className="w-fit flex items-center gap-1.5 px-3 py-2 bg-[#f5f5f5] hover:brightness-[0.97] transition-colors duration-300 text-sm text-foreground font-medium border border-border cursor-pointer rounded-[9px] group overflow-hidden"
+              className="w-fit flex items-center gap-1.5 px-3 py-2 bg-secondary hover:bg-accent transition-colors duration-300 text-sm text-foreground font-medium border border-border cursor-pointer rounded-[9px] group overflow-hidden"
               href={personalInfo.resumePath}
               target="_blank"
               rel="noopener noreferrer"
@@ -356,7 +408,7 @@ const HeroHeader = () => {
           >
             <h2 className="text-sm font-medium text-foreground">
               Here are my{" "}
-              <span className="font-semibold text-black">socials</span>
+              <span className="font-semibold text-title">socials</span>
             </h2>
             <div className="flex gap-2 items-center flex-wrap">
               <SocialLink
@@ -464,11 +516,11 @@ const HeroHeader = () => {
                   <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
                     <span>Less</span>
                     <div className="flex gap-1">
-                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#ebedf0]"></div>
-                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#d1d5db]"></div>
-                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#9ca3af]"></div>
-                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#6b7280]"></div>
-                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#374151]"></div>
+                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22]"></div>
+                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#c4c8cf] dark:bg-[#0e4429]"></div>
+                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#8b929c] dark:bg-[#006d32]"></div>
+                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#5c636e] dark:bg-[#26a641]"></div>
+                      <div className="w-[10px] h-[10px] rounded-[2px] bg-[#2d3340] dark:bg-[#39d353]"></div>
                     </div>
                     <span>More</span>
                   </div>
@@ -496,7 +548,7 @@ const SocialLink = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center px-2 py-1 bg-[#f5f5f5] hover:bg-[#e5e5e5] transition-colors duration-200 select-none rounded-[6px] text-sm font-medium text-foreground"
+    className="flex items-center px-2 py-1 bg-secondary hover:bg-accent transition-colors duration-200 select-none rounded-[6px] text-sm font-medium text-foreground"
   >
     <span className="flex items-center">{icon}</span>
     <span className="ml-1.5">{label}</span>
