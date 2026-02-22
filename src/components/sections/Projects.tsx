@@ -50,7 +50,7 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <section className="relative z-50 bg-background">
+    <section className="relative z-50 bg-background" aria-label="Projects">
       <div className="relative p-3">
         <h2 className="text-[1.125rem] font-semibold leading-[1.5] text-title select-none">
           What I'm building.

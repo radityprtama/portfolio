@@ -191,7 +191,7 @@ const HeroHeader = () => {
   };
 
   return (
-    <div className="w-full">
+    <header className="w-full" role="banner" itemScope itemType="https://schema.org/Person">
       <div className="relative z-50 bg-background transition-colors duration-300">
         <div className="relative p-3">
           <div className="w-full h-[60px] sm:h-[140px] dot-grid"></div>
@@ -212,7 +212,7 @@ const HeroHeader = () => {
               >
                 <div className="border border-border rounded-[12px] p-[4px] cursor-pointer hover:brightness-90 transition duration-300 bg-background">
                   <Image
-                    alt="Profile"
+                    alt="Raditya Alia Pratama — Aspiring AI Engineer and SaaS Builder"
                     width={90}
                     height={90}
                     className="rounded-[8px] select-none object-cover"
@@ -499,7 +499,7 @@ const HeroHeader = () => {
         </div>
         <div className="dashed-separator mt-6"></div>
       </div>
-    </div>
+    </header>
   );
 };
 

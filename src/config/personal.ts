@@ -17,3 +17,31 @@ export const personalInfo = {
     leetcode: "https://leetcode.com/u/zurravie/",
   },
 };
+
+export const siteConfig = {
+  url: "https://pratama.dev",
+  name: "Raditya Alia Pratama",
+  description:
+    "Raditya Alia Pratama — Vocational student, aspiring AI engineer, and SaaS builder. Explore my projects, experience, and skills in AI, full-stack development, and open-source.",
+  locale: "en_US",
+  keywords: [
+    "Raditya Alia Pratama",
+    "Raditya Pratama",
+    "radityprtama",
+    "radibyp",
+    "pratama.dev",
+    "AI engineer",
+    "SaaS builder",
+    "full-stack developer",
+    "SMK Nusantara 1",
+    "vocational student developer",
+    "Indonesia developer",
+    "Next.js developer",
+    "React developer",
+    "open source contributor",
+    "Kalt",
+    "Genia",
+    "Trac",
+    "KaltLabs",
+  ],
+} as const;

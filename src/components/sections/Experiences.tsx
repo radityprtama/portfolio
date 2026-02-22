@@ -109,7 +109,7 @@ const Experiences = () => {
   };
 
   return (
-    <section className="relative z-50 bg-background">
+    <section className="relative z-50 bg-background" aria-label="Work Experience">
       <div className="relative p-3">
         <h2 className="text-lg font-semibold text-title select-none">
           My experience.
